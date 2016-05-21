@@ -9,7 +9,7 @@
 	<!-- Bootstrap -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<!-- Font-awesome -->
-	<link rel="stylesheet" href="css/font-awesome/font-awesome.min.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<!-- Nuestro CSS -->
 	<link href="css/index.css" rel="stylesheet">
 </head>
@@ -23,17 +23,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Project name</a>
+				<a class="navbar-brand" href="index.html">Hundir la flota</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-success">Sign in</button>
+				<form class="navbar-form navbar-right" onsubmit="return loginRequest();" action="#">
+					
 				</form>
 			</div><!--/.navbar-collapse -->
 		</div>
@@ -41,41 +35,118 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Hello, world!</h1>
-			<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-			<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+			<h1>Hundir la flota</h1>
+			<p>Bienvenido al videojuego oficial del conocido juego de mesa hundir la flota. Compite en batallas de barcos contra otros oponentes. ¿Aún no estás registrado?</p>
+			<p ><a id="jsRegistroButton" class="btn btn-primary btn-lg" href="#" role="button">Regístrate <i class="fa fa-plug"></i></a></p>
 		</div>
 	</div>
 
 	<div class="container">
 		<!-- Example row of columns -->
 		<div class="row">
-			<div class="col-md-4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-			</div>
-			<div class="col-md-4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-			</div>
-			<div class="col-md-4">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-				<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-			</div>
+			<h2>Leaderboard</h2>
+			<table class="table table-hover" id="jsTablaClasi">
+				<thead>
+				<tr>
+					<th>Jugador</td>
+					<th>Partidas Jugadas</th>
+					<th>Partidas Ganadas</th>
+				</tr>
+				</thead>
+				<tbody id="jsBodyTable">
+				</tbody>
+			</table>
 		</div>
 
-		<hr>
-
 		<footer>
-			<p>&copy; 2015 Company, Inc.</p>
+			<p>&copy; 2016 Julio Zamora, Antonio Rebollo - Práctica Final PH2 - Ingeniería Multimedia</p>
 		</footer>
 	</div> <!-- /container -->
-	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" style="color: green" id="myModalLabel">Bienvenido!</h4>
+				</div>
+				<div class="modal-body" style="color: green">
+					Login Correcto, espere porfavor...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Regístrate</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Formulario de registro -->
+					<form class="form-horizontal" onsubmit="return postRegistro(this);">
+						<div class="form-group">
+						    <label for="nombreUsuario" class="col-sm-2 control-label">Usuario</label>
+						    <div class="col-sm-10">
+						    	<input type="name" class="form-control" id="nombreUsuario" placeholder="Usuario" name="login">
+						    	<div id="nombreNo" class="error-index" style="display: none">
+									<p><i class="fa fa-times"></i> El nombre de usuario no esta disponible.</p>
+								</div>
+						    	<div id="nombreSi" class="error-index-verde" style="display: none;">
+									<p><i class="fa fa-check"></i> El nombre de usuario está disponible.</p>
+								</div>
+						    </div>
+						</div>
+
+						<div class="form-group">
+						    <label for="nombreCompleto" class="col-sm-2 control-label">Nombre completo</label>
+						    <div class="col-sm-10">
+						    	<input type="name" class="form-control" id="nombreCompleto" placeholder="Nombre" name="nombre">
+						    </div>
+						</div>
+
+						<div class="form-group">
+						    <label for="password" class="col-sm-2 control-label">Contraseña</label>
+						    <div class="col-sm-10">
+						    	<input type="password" class="form-control" id="password" placeholder="Contraseña" name="pwd">
+						    </div>
+						</div>
+
+						<div class="form-group">
+						    <label for="password2" class="col-sm-2 control-label">Repite la contraseña</label>
+						    <div class="col-sm-10">
+						    	<input type="password" class="form-control" id="password2" placeholder="Repite la contraseña" name="pwd2">
+						    	<div id="passNo" class="error-index" style="display: none">
+									<p><i class="fa fa-times"></i> Las contraseñas no coinciden.</p>
+								</div>
+						    </div>
+						</div>
+
+						<div class="form-group">
+						    <label for="emailRegistro" class="col-sm-2 control-label">Email</label>
+						    <div class="col-sm-10">
+						    	<input type="email" class="form-control" id="emailRegistro" placeholder="Email" name="email">
+						    </div>
+						</div>
+
+						<div class="modal-footer">
+							<input id="jsEnviarRegistro" type="submit" class="btn btn-success" >
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>

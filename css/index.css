@@ -1,4 +1,30 @@
 body {
   padding-top: 50px;
   padding-bottom: 20px;
+  min-width: 480px;
+}
+.jumbotron {
+	background-image:url('../resources/barcosFondoBanner.jpg');
+	background-size: cover;
+	background-position:center;
+	background-repeat: no-repeat;
+}
+.error-index{
+	margin-right: 10px;
+	color: red;
+}
+.error-index-verde{
+	color: green;
+	margin-right: 10px;
+}
+.jumbotron > .container{
+	color: white;
+}
+.padding-right{
+	padding-right:5px;
+}
+.bordeAzul{
+	border-style: solid;
+    border-width: 2px;
+    border-color: #3D74E3;
 }

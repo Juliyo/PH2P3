@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>P3 - PH2</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap -->
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<!-- Font-awesome -->
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<!-- Nuestro CSS -->
+	<link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">Hundir la flota</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" onsubmit="return loginRequest();" action="#">
+					
+				</form>
+			</div><!--/.navbar-collapse -->
+		</div>
+	</nav>
+
+	
+
+	<div class="container">
+	<h2>Posición de tus barcos</h2>
+		<div style="padding-top: 25px">
+            <canvas id="tablero" width="460px" height="480px" ondragover="dragOverFunc(event)" ondrop="dropShip(event)"></canvas>
+        </div>
+        <h4>Arrastra tus barcos a la cuadrícula</h4>
+        <div style="padding-top: 10px" id="barcos4"></div>
+        <div style="padding-top: 15px" id="barcos3"></div>
+        <div style="padding-top: 15px" id="barcos2"></div>
+        <div style="padding-top: 15px; padding-bottom: 25px;" id="barcos1"></div>
+		<footer>
+			<p>&copy; 2016 Julio Zamora, Antonio Rebollo - Práctica Final PH2 - Ingeniería Multimedia</p>
+		</footer>
+	</div> <!-- /container -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" style="color: green" id="myModalLabel">Bienvenido!</h4>
+				</div>
+				<div class="modal-body" style="color: green">
+					Login Correcto, espere porfavor...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/juego.js"></script>
+</body>
+</html>
